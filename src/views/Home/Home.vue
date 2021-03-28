@@ -1,14 +1,35 @@
 <template>
-    <div id="home">
-        <h1>首页</h1>
-        <div style="background-color: red">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo, veniam possimus, dolorum hic dignissimos consequuntur quis fugiat repudiandae placeat, perferendis quisquam voluptas. Similique quos est corporis aut accusantium molestiae ducimus?
-        </div>
+    <div id="home" >
+        <swiper :imglist="imgList" />
     </div>
 </template>
 <script>
+import Swiper from 'components/Swiper/Swiper.vue'
+import {getImglist} from 'network/home'
 export default {
-    name: 'Home'
+    name: 'Home',
+    components: {
+        Swiper
+    },
+    data() {
+        return {
+            imgList: []
+        }
+    },
+    created() {
+     this.getImglist()
+
+    },
+
+    methods: {
+        getImglist() {
+            getImglist().then(res => {
+                this.imgList = res.data
+            })
+        },
+    }
+
+    
 
 }
 </script>
